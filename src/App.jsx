@@ -23,9 +23,14 @@ function Board({ xIsNext, squares, onPlay}) {
   }
 
   const winner = calculateWinner(squares);
+
+  const isDraw = !winner && squares.every(square => square !== null);
+
   let status;
   if (winner) {
     status = "Winner: " + winner;
+  } else if (isDraw) {
+    status = "Draw";
   } else {
     status = "Next player: " + (xIsNext ? "X" : "O");
   }
@@ -82,9 +87,9 @@ const moves = history.map((squares, move) => {
     description = 'Go to game start';
   }
   return (
-    <il key={move}>
+    <li key={move}>
       <button onClick={() => jumpTo(move)}>{description}</button>
-    </il>
+    </li>
   );
 });
 
